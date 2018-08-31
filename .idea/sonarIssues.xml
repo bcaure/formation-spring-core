@@ -28,6 +28,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../caplab/components/back/src/main/java/org/caplab/core/model/FilterCriteria.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../caplab/components/back/src/main/java/org/caplab/domain/main/PersonController.java">
           <value>
             <set />
@@ -284,6 +289,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/org/bca/training/spring/core/beans/read/CsvFileDatasource.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/org/bca/training/spring/core/exercices.md">
           <value>
             <set />
           </value>

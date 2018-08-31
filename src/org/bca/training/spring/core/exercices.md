@@ -12,3 +12,5 @@
 * on veut maintenant que l'application injecte dynamiquement le type d'objet décrit à chaque ligne du fichier data.csv
 * décommenter les lignes de CsvFileDatasource et compléter la partie manquante
 * L'application devrait réussir à lire toutes les lignes en instanciant le bon obje
+
+#### [Solutions](solution.md)
