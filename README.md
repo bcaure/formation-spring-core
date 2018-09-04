@@ -97,19 +97,18 @@ Utilisations courantes :
   * ```list.stream().reduce()``` : transformer le stream en un seul objet (somme, concaténation, trouver le max)
   * ```list.stream().collect()``` : transformer le stream en une autre collection (liste, set, map)
 
-### Les Optional
+### Les optionals
 
 Optional a été inventé principalement pour les streams : cela permet d'éviter les NullPointerException.
 Optional contient un objet ou null, mais lui même n'est jamais null.
 
-Par ex je recherche la valeur max d'une liste, mais celle-ci est vide, je peux retourner facilement 0 au lieu de null
-    Integer result = list.stream().max().orElse(0).get();
+[Cas pratique](src/org/bca/training/java/basics/Optionals.java)
 
-### Principes des annotations
+### Les annotations
 
 [Cas pratique](src/org/bca/training/java/basics/Annotations.java)
 
-### Serialisation
+### La sérialisation
 
 Transformer les objets en JSON et inversement.
 
@@ -127,9 +126,16 @@ Configuration - 2 notions :
 * LOGGER : ce qu'on appelle depuis le code ```logger.log()```
 * APPENDER : où sont écrits les logs et le format 
 
+Utilisation:
+
+    protected Logger logger = LoggerFactory.getLogger(MaClasse.class);
+    logger.debug("...");
+    logger.info("...");
+    logger.error("...", exception);
+
 ## Fondamentaux Web/client-serveur
 
-Serveur Java (ex: Tomcat) : _JVM qui tourne en continue et qui reçoit des requêtes (HTTP GET, POST, ...) et retourne des réponses (JSON, HTML, XML...).
+Serveur Java (ex: Tomcat, Websphere, Weblogic) : _JVM qui tourne en continue et qui reçoit des requêtes (HTTP GET, POST, ...) et retourne des réponses (JSON, HTML, XML...).
 - auparavant les pages HTML sont générées côté serveur avec JSP ou JSF (équivalent à PHP)
 - de nos jours on utilise un serveur Java comme "backend", c'est à dire qu'on renvoit les données brutes en JSON
 
@@ -139,16 +145,25 @@ Ces outils se substituent à un frontend Javascript par exemple.
 Ce qui traite les requêtes et les réponses sont les Servlets : _Tomcat est un _conteneur de servlet_.
 Les _controllers_ sont des servlets améliorées pour implémenter plus facilement les web services REST.
 
+Une application Java est packagé sous forme de fichier .jar (zip) lorsqu'elle est autonome, .war lorsqu'elle doit être déployée sur un serveur d'application.
+SpringBoot est le plus souvent livré sous forme d'une application autonome contenant le serveur Tomcat ("fat JAR").
+
+Principaux éléments de configuration:
+* la datasource qui est souvent l'adresse de la base de données avec son driver JDBC
+* les loggers qui seront très verbeux en dev et beaucoup moins en prod
+* d'autres services externes comme un serveur d'authentification (LDAP, oAuthn ...) , un serveur mail, un serveur d'intégration avec d'autres applications (MQ, Apache Camel, etc.) 
+
 ### Fondamentaux ORM
 
-Un modèle relationnel est différent d'un modèle objet.
-
-On utilise un mapping pour spécifier comment enregistrer les objets en base de données.
+Un modèle relationnel étant différent du modèle objet, on utilise un mapping pour spécifier comment enregistrer les objets en base de données.
 
 La plupart du temps, 1 objet = 1 table, 1 attribut = 1 colonne, etc.
 Sauf pour les cas particuliers :
+- relations
+   * n---1, 0,*---1   ou many-to-one
+   * 1---n,  1----0,* ou one-to-many
+   * n---n, 0,\*--0,* ou many-to-many
 - héritage
-- relation n-n
 
 L'ORM sert également à ne plus écrire de SQL donc facilite le changement de moteur de base de données.
 

@@ -1,22 +1,26 @@
 package org.bca.training.java.basics;
 
-public class Lambdas {
-  public static void main(String ... args) throws Exception {
-    String[] strings = {"miaou", "you shall not pass", "pouet"};
-
-    screamThis(strings, s -> System.out.println(s.toUpperCase()+"!"));
-  }
-
-  static void screamThis(String[] strings, Scream function) {
-    for (String string : strings) {
-      function.scream(string);
-    }
-  }
-}
-
+/** Description de la fonction "Scream" avec une interface de fonction */
 @FunctionalInterface
 interface Scream {
   void scream(String s);
 }
 
+public class Lambdas {
 
+  /** Cette méthode prend une fonction "Scream" en paramètre et l'applique aux messages */
+  static void screamThis(String[] messages, Scream function) {
+    for (String message : messages) {
+      function.scream(message);
+    }
+  }
+
+  public static void main(String ... args) throws Exception {
+
+    String[] messages = {"miaou", "you shall not pass", "pouet"};
+
+    // Exercice : utiliser une fonction lambda pour afficher toutes les valeurs de messages en majuscule
+    // screamThis(messages, ...);
+
+  }
+}
