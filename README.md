@@ -1,10 +1,8 @@
-## Les fondamentaux du langage
+## Quelques fondamentaux sur le langage JAVA
 
 ### La convention JavaBean
 
 Doit implémenter Serializable (sérialization binaire "interne" à Java, pas la sérialization JSON ou XML)
-Pourquoi? difficile à dire ... 
-_"Serialization was a horrible mistake in 1997"_ (Oracle Chief Architect, Devoxx UK 2018)
 
     public class PersonBean implements Serializable {
 
@@ -31,7 +29,42 @@ Avoir des accesseurs pour tous les attributs publics
         }
     }
 
+### Les collections
+
+Tableau ```MyObject[]``` : type de base, peu utilisé
+
+```List<MyObject> list = new ArrayList<>();``` : collection la plus utilisée
+* ses éléments ont une position : ```list.get(3)```
+
+```Set<MyObject> set = new HashSet<>();``` : 2e collection la plus utilisée.
+* elle sert à avoir une liste garantie sans doublons, car si on ajoute un élement existant il est remplacé.
+
+```Map<MyObject> set = new HashMap<>();``` : collection très utilisée pour associer une clé à une valeur.
+* les clés sont garanties sans doublons comme les Set
+* on peut utiliser n'importe quel objet comme clé ou comme valeur
+
+**Si vous utilisez une autre collection :**
+ soit vous codez quelquechose de très pointu,
+ soit vous faites une erreur...
+
+
+### Les optionals
+
+Optional a été inventé principalement avec l'API stream : cela permet d'éviter les NullPointerException.
+Optional contient un objet ou null, mais lui même n'est jamais null.
+
+[Cas pratique](src/org/bca/training/java/basics/Optionals.java)
+
 ### Les expressions lambda
+
+Utilisations courantes :
+* parcours boucle for : ```for (MyObject o : list)```
+* parcours lambdas : ```list.forEach(o -> ...)```
+* les "streams" qui sont une collection d'opérations sur les listes : 
+  * ```list.stream().map()``` : transformer le stream d'objetA en stream d'objetB
+  * ```list.stream().reduce()``` : transformer le stream en un seul objet (somme, concaténation, trouver le max)
+  * ```list.stream().collect()``` : transformer le stream en une autre collection (liste, set, map)
+
 
 Avant :
 
@@ -47,8 +80,7 @@ Maintenant :
 
     list.forEach(string -> <....>);
 
-Je peux créer mes [propres méthodes](src/org/bca/training/java/basics/Lambdas.java) qui prennent des lambdas en paramètre.
-
+Je peux implémenter des algorithmes complexes [propres méthodes](src/org/bca/training/java/basics/Lambdas.java) avec seulement des expressions lambdas.
 
 
 ### Le polymorphisme
@@ -71,42 +103,17 @@ Je peux tous les afficher car ils implémentent la méthode ```toString()```: m�
 
     list.forEach(object -> System.out.println(object.toString()));
 
-### Les collections
-
-Tableau ```MyObject[]``` : type de base, peu utilisé
-
-```List<MyObject> list = new ArrayList<>();``` : collection la plus utilisée
-* ses éléments ont une position : ```list.get(3)```
-
-```Set<MyObject> set = new HashSet<>();``` : 2e collection la plus utilisée.
-* elle sert à avoir une liste garantie sans doublons, car si on ajoute un élement existant il est remplacé.
-
-```Map<MyObject> set = new HashMap<>();``` : collection très utilisée pour associer une clé à une valeur.
-* les clés sont garanties sans doublons comme les Set
-* on peut utiliser n'importe quel objet comme clé ou comme valeur
-
-**Si vous utilisez une autre collection :**
- soit vous codez quelquechose de très pointu,
-soit vous faites une erreur...
-
-Utilisations courantes :
-* parcours boucle for : ```for (MyObject o : list)```
-* parcours lambdas : ```list.forEach(o -> ...)```
-* les "streams" qui sont une collection d'opérations sur les listes : 
-  * ```list.stream().map()``` : transformer le stream d'objetA en stream d'objetB
-  * ```list.stream().reduce()``` : transformer le stream en un seul objet (somme, concaténation, trouver le max)
-  * ```list.stream().collect()``` : transformer le stream en une autre collection (liste, set, map)
-
-### Les optionals
-
-Optional a été inventé principalement pour les streams : cela permet d'éviter les NullPointerException.
-Optional contient un objet ou null, mais lui même n'est jamais null.
-
-[Cas pratique](src/org/bca/training/java/basics/Optionals.java)
-
 ### Les annotations
 
-[Cas pratique](src/org/bca/training/java/basics/Annotations.java)
+Permet de "marquer" les classes, les attributs et les méthodes pour qu'un framework les reconnaissent et les utilisent dans certains cas.
+Par exemple :
+    @RestController
+    @RequestMapping("/api")
+    public class ManufacturerResource {
+
+    }
+
+Cela indique à Spring qu'il doit utiliser cette classe pour traiter les appels de web services dont l'URL est http://..../api/...
 
 ### La sérialisation
 
